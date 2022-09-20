@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvalient <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 09:35:24 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/20 10:22:41 by mvalient         ###   ########.fr       */
+/*   Created: 2022/09/20 10:21:09 by mvalient          #+#    #+#             */
+/*   Updated: 2022/09/20 10:38:13 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# include <libc.h>
-# include <stddef.h>
-# include <stdio.h>
+int	main(void)
+{
+	int		fd;
+	char	*buf;
 
-char	*get_next_line(int fd);
-
-#endif
+	fd = open("file.txt", O_RDONLY);
+	buf = malloc(BUFFER_SIZE + 1);
+	buf[BUFFER_SIZE + 1] = 0;
+	read(fd, buf, BUFFER_SIZE);
+	printf("%s", buf);
+	return (0);
+}
