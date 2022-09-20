@@ -6,6 +6,18 @@
 /*   By: mvalient <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:37:26 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/20 09:37:48 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:56:23 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
+
+void	ft_buf_0_after_nl(void *buf)
+{
+	while (*(char *)buf != '\n')
+		buf++;
+	while (*(char *)buf)
+	{
+		*(char *)buf = 0;
+	}
+}

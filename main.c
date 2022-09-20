@@ -6,7 +6,7 @@
 /*   By: mvalient <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 10:21:09 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/20 10:38:13 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:44:11 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 int	main(void)
 {
 	int		fd;
-	char	*buf;
 
 	fd = open("file.txt", O_RDONLY);
-	buf = malloc(BUFFER_SIZE + 1);
-	buf[BUFFER_SIZE + 1] = 0;
-	read(fd, buf, BUFFER_SIZE);
-	printf("%s", buf);
+	printf("%s", get_next_line(fd));
 	return (0);
 }
