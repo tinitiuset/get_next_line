@@ -15,8 +15,11 @@
 int	main(void)
 {
 	int		fd;
+	char	*print;
 
-	fd = open("file.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
+	fd = open("file.txt", O_RDWR);
+	print = get_next_line(fd);
+	printf("%s", print);
+	free(print);
 	return (0);
 }
