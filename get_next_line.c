@@ -6,23 +6,22 @@
 /*   By: mvalient <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:34:13 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/26 12:31:05 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:13:00 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_get_raw_line(int fd)
+char	*ft_get_raw_line(int fd, char *extra)
 {
-	int			read_result;
-	char		*templine;
-	static char	*rawline;
+	int		read_result;
+	char	*templine;
 
 	templine = malloc(BUFFER_SIZE + 1);
 	if (!templine)
 		return (NULL);
 	read_result = 1;
-	while (!ft_strchr(rawline, '\n') && read_result > 0)
+	while (!ft_strchr(extra, '\n') && read_result > 0)
 	{
 		read_result = read(fd, templine, BUFFER_SIZE);
 		if (read_result < 0)
@@ -31,10 +30,10 @@ char	*ft_get_raw_line(int fd)
 			return (NULL);
 		}
 		templine[read_result] = '\0';
-		rawline = ft_strjoin(rawline, templine);
+		extra = ft_strjoin(extra, templine);
 	}
 	free(templine);
-	return (rawline);
+	return (extra);
 }
 
 char	*ft_trim_line(char *line)
@@ -45,9 +44,9 @@ char	*ft_trim_line(char *line)
 	if (!line)
 		return (NULL);
 	if (!*line)
-		i = 0;
+		return (NULL);
 	else
-		i = (int)(ft_strchr(line, '\n') - line) + 1;
+		i = ft_count_until('\n', line) + 1;
 	trimline = malloc(i + 1);
 	if (!trimline)
 		return (NULL);
@@ -60,11 +59,13 @@ char	*ft_trim_line(char *line)
 
 char	*get_next_line(int fd)
 {
-	void	*line;
+	char		*line;
+	static char	*extra;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
-	line = ft_get_raw_line(fd);
+	line = ft_get_raw_line(fd, extra);
+	extra = ft_strdup(ft_strchr(line, '\n') + 1);
 	line = ft_trim_line(line);
 	return (line);
 }

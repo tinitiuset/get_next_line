@@ -6,7 +6,7 @@
 /*   By: mvalient <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:37:26 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/20 10:56:23 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:13:50 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,18 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
+int	ft_count_until(int n, const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != n)
+	{
+		i++;
+	}
+	return (i);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
@@ -66,4 +78,23 @@ char	*ft_strjoin(char *s1, char *s2)
 	ns[i] = '\0';
 	free(s1);
 	return (ns);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	int		j;
+	char	*news;
+
+	i = ft_strlen(s) + 1;
+	news = malloc(i);
+	j = 0;
+	if (!news)
+		return (NULL);
+	while (i--)
+	{
+		news[j] = s[j];
+		j++;
+	}
+	return (news);
 }
