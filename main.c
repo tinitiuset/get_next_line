@@ -19,7 +19,10 @@ int	main(void)
 
 	fd = open("file.txt", O_RDWR);
 	print = get_next_line(fd);
-	printf("%s", print);
+	printf("%s|", print);
+	free(print);
+	print = get_next_line(fd);
+	printf("%s|", print);
 	free(print);
 	return (0);
 }
