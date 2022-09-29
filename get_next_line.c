@@ -31,8 +31,6 @@ char	*ft_get_raw_line(int fd, char *extra)
 		}
 		templine[read_result] = '\0';
 		extra = ft_strjoin(extra, templine);
-		if (read_result == 0)
-			break ;
 	}
 	free(templine);
 	return (extra);
@@ -67,8 +65,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
 	line = ft_get_raw_line(fd, extra);
-	if (ft_strchr(line, '\n'))
+	if (extra)
+	{
 		extra = ft_strdup(ft_strchr(line, '\n') + 1);
-	line = ft_trim_line(line);
+		line = ft_trim_line(line);
+	}
 	return (line);
 }

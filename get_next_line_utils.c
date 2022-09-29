@@ -47,9 +47,13 @@ int	ft_count_until(int n, const char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (0);
 	i = 0;
-	while (s[i] && s[i] != n)
+	while (s[i])
 	{
+		if (s[i] == n)
+			return (i);
 		i++;
 	}
 	return (i);
@@ -64,7 +68,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
+	len = ft_count_until(0, s1) + ft_count_until(0, s2);
 	if (!len)
 		return (NULL);
 	ns = malloc(len + 1);
