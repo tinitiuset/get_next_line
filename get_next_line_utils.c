@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvalient <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:37:26 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/28 15:27:31 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:43:32 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,6 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == (c % 256))
 		return ((char *)&s[i]);
 	return (NULL);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
 }
 
 int	ft_count_until(int n, const char *s)
@@ -88,13 +74,23 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (ns);
 }
 
-char	*ft_strdup(const char *s)
+void	*ft_free_malloc(void *s)
+{
+	free(s);
+	return (NULL);
+}
+
+char	*ft_strdup(char *ntf, const char *s)
 {
 	int		i;
 	int		j;
 	char	*news;
 
-	i = ft_strlen(s) + 1;
+	if (!ft_strchr(ntf, '\n'))
+		return (ft_free_malloc(ntf));
+	i = ft_count_until(0, s) + 1;
+	if (i == 1)
+		return (ft_free_malloc(ntf));
 	news = malloc(i);
 	j = 0;
 	if (!news)
@@ -104,5 +100,6 @@ char	*ft_strdup(const char *s)
 		news[j] = s[j];
 		j++;
 	}
+	free(ntf);
 	return (news);
 }
