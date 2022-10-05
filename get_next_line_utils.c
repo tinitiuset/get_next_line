@@ -6,13 +6,13 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:37:26 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/29 13:43:32 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:53:47 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_gnl_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ int	ft_count_until(int n, const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -80,13 +80,13 @@ void	*ft_free_malloc(void *s)
 	return (NULL);
 }
 
-char	*ft_strdup(char *ntf, const char *s)
+char	*ft_gnl_strdup(char *ntf, const char *s)
 {
 	int		i;
 	int		j;
 	char	*news;
 
-	if (!ft_strchr(ntf, '\n'))
+	if (!ft_gnl_strchr(ntf, '\n'))
 		return (ft_free_malloc(ntf));
 	i = ft_count_until(0, s) + 1;
 	if (i == 1)

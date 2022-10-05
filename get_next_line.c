@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:34:13 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/29 13:44:19 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:53:47 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_get_raw_line(int fd, char *extra)
 	if (!templine)
 		return (NULL);
 	read_result = 1;
-	while (!ft_strchr(extra, '\n') && read_result > 0)
+	while (!ft_gnl_strchr(extra, '\n') && read_result > 0)
 	{
 		read_result = read(fd, templine, BUFFER_SIZE);
 		if (read_result < 0)
@@ -30,7 +30,7 @@ char	*ft_get_raw_line(int fd, char *extra)
 			return (NULL);
 		}
 		templine[read_result] = '\0';
-		extra = ft_strjoin(extra, templine);
+		extra = ft_gnl_strjoin(extra, templine);
 	}
 	free(templine);
 	return (extra);
@@ -65,6 +65,6 @@ char	*get_next_line(int fd)
 		return (0);
 	extra = ft_get_raw_line(fd, extra);
 	line = ft_trim_line(extra);
-	extra = ft_strdup(extra, ft_strchr(extra, '\n') + 1);
+	extra = ft_gnl_strdup(extra, ft_gnl_strchr(extra, '\n') + 1);
 	return (line);
 }

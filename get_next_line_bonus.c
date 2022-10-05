@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:27:36 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/29 14:27:42 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:53:47 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_get_raw_line(int fd, char *extra)
 	if (!templine)
 		return (NULL);
 	read_result = 1;
-	while (!ft_strchr(extra, '\n') && read_result > 0)
+	while (!ft_gnl_strchr(extra, '\n') && read_result > 0)
 	{
 		read_result = read(fd, templine, BUFFER_SIZE);
 		if (read_result < 0)
@@ -30,7 +30,7 @@ char	*ft_get_raw_line(int fd, char *extra)
 			return (NULL);
 		}
 		templine[read_result] = '\0';
-		extra = ft_strjoin(extra, templine);
+		extra = ft_gnl_strjoin(extra, templine);
 	}
 	free(templine);
 	return (extra);
@@ -65,6 +65,6 @@ char	*get_next_line(int fd)
 		return (0);
 	extra[fd] = ft_get_raw_line(fd, extra[fd]);
 	line = ft_trim_line(extra[fd]);
-	extra[fd] = ft_strdup(extra[fd], ft_strchr(extra[fd], '\n') + 1);
+	extra[fd] = ft_gnl_strdup(extra[fd], ft_gnl_strchr(extra[fd], '\n') + 1);
 	return (line);
 }
